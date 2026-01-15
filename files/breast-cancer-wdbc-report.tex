@@ -1,0 +1,93 @@
+\\documentclass[11pt]{article}
+\\usepackage{geometry}
+\\usepackage{graphicx}
+\\usepackage{booktabs}
+\\usepackage{hyperref}
+\\geometry{margin=1in}
+\\title{Breast Cancer Diagnostic Analysis (WDBC)}
+\\author{Medical Data Analysis Project}
+\\date{\\today}
+\\begin{document}
+\\maketitle
+
+\\section{Dataset}
+The Wisconsin Diagnostic Breast Cancer (WDBC) dataset contains 569 samples with 30 numeric features derived from
+fine needle aspirate images. The target label indicates malignant (M) or benign (B) tumors.
+
+\\section{Preprocessing}
+We removed the identifier column, encoded diagnosis as binary (M=1, B=0), and used stratified train/test splits.
+Summary statistics are shown below.
+
+\\subsection{Data Overview}
+\\begin{itemize}
+  \\item Rows: 569
+  \\item Columns: 32
+  \\item Missing values: 0
+  \\item Duplicate rows: 0
+\\end{itemize}
+
+\\section{Modeling and Evaluation}
+We trained a logistic regression model with standardization and a random forest classifier. Performance metrics are
+reported in Table~\\ref{tab:metrics}.
+
+\\begin{table}[h]
+\\centering
+\begin{tabular}{lrrrrr}
+\toprule
+model & accuracy & precision & recall & f1 & roc_auc \\
+\midrule
+LogisticRegression & 0.974 & 0.976 & 0.952 & 0.964 & 0.995 \\
+RandomForest & 0.974 & 1.000 & 0.929 & 0.963 & 0.997 \\
+\bottomrule
+\end{tabular}
+
+\\caption{Model evaluation metrics on the test set.}
+\\label{tab:metrics}
+\\end{table}
+
+\\section{Visual Exploration}
+Figures~\\ref{fig:class}--\\ref{fig:importance} summarize key findings.
+
+\\begin{figure}[h]
+\\centering
+\\includegraphics[width=0.6\\linewidth]{figures/class_distribution.png}
+\\caption{Class distribution.}
+\\label{fig:class}
+\\end{figure}
+
+\\begin{figure}[h]
+\\centering
+\\includegraphics[width=0.9\\linewidth]{figures/feature_boxplot.png}
+\\caption{Top feature distributions.}
+\\label{fig:box}
+\\end{figure}
+
+\\begin{figure}[h]
+\\centering
+\\includegraphics[width=0.7\\linewidth]{figures/correlation_heatmap.png}
+\\caption{Correlation heatmap of top features.}
+\\label{fig:heatmap}
+\\end{figure}
+
+\\begin{figure}[h]
+\\centering
+\\includegraphics[width=0.6\\linewidth]{figures/roc_curve.png}
+\\caption{ROC curves.}
+\\label{fig:roc}
+\\end{figure}
+
+\\begin{figure}[h]
+\\centering
+\\includegraphics[width=0.6\\linewidth]{figures/confusion_matrix.png}
+\\caption{Random forest confusion matrix.}
+\\label{fig:cm}
+\\end{figure}
+
+\\begin{figure}[h]
+\\centering
+\\includegraphics[width=0.7\\linewidth]{figures/feature_importance.png}
+\\caption{Top feature importance from random forest.}
+\\label{fig:importance}
+\\end{figure}
+
+\\end{document}
